@@ -30,6 +30,7 @@ def euler_step(solver_settings, dynamics, grid, time, values, time_step=None, ma
     if time_step is None:
         time_step_bound = 1 / jnp.max(jnp.sum(dissipation_coefficients / jnp.array(grid.spacings), -1))
         time_step = time_direction * jnp.minimum(solver_settings.CFL_number * time_step_bound, jnp.abs(max_time_step))
+        print(time_step)
     # TODO: Think carefully about whether `solver_settings.value_postprocessor` should be applied here instead.
     return time + time_step, values + time_step * dvalues_dt
 
